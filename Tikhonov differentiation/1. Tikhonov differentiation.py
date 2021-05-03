@@ -23,10 +23,10 @@ f = splrep(x,noisy_data,k=5,s=3) # B-spline
 plt.figure(1)
 plt.plot(x, noisy_data, label="noisy data")
 plt.plot(x, splev(x,f), label="B-Spline")
-derivSpline=splev(x,f,der=1)/10  # B-spline derivative
+derivSpline=splev(x,f,der=1)  # B-spline derivative
 
 #plt.plot(x, splev(x,f,der=2)/100, label="2nd derivative")
-plt.hlines(0,0,2)
+#plt.hlines(0,0,2)
 plt.legend(loc=0)
 
 """
