@@ -1,0 +1,1 @@
+docker run dolfinx/dolfinx:stable python3 file.py

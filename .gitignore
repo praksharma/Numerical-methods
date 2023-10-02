@@ -1,0 +1,7 @@
+.cache/
+.ipynb_checkpoints/
+.ipython/
+.jupyter/
+.local/
+.fltk/
+5. fenicsx/test/

@@ -1,0 +1,4 @@
+docker run dolfinx/dolfinx:stable python3 file.py
+docker run --init -ti -p 8888:8888 dolfinx/lab:stable  # Access at http://localhost:8888
+
+docker run --init -ti -v "$(pwd)":/root -p 8888:8888 dolfinx/lab:stable
