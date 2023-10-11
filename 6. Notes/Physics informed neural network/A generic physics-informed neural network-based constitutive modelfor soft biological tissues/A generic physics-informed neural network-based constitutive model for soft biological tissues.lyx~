@@ -1,0 +1,544 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted1.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted2.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+novel generic physics-informed neural network material (NNMat) model
+\end_layout
+
+\begin_layout Enumerate
+establishing constitutive laws to describe general characteristic behaviors
+ of a class of materials;
+\end_layout
+
+\begin_layout Enumerate
+determining constitutive parameters for an individual subject.
+ A novel neural network structure was proposed which has two sets of parameters:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+a class parameter set for characterizing the general elastic properties;
+\end_layout
+
+\begin_layout Enumerate
+a subject parameter set (three parameters) for describing individual material
+ response.
+\end_layout
+
+\end_deeper
+\begin_layout Section
+introduction
+\end_layout
+
+\begin_layout Standard
+Among the three key components required to solve a continuum biomechanics
+ problem, i.e., the geometry (the domain of interest), the constitutive relations
+ (how the material responds to applied loads under conditions of interest),
+ and the applied loads (or associated boundary conditions).
+\end_layout
+
+\begin_layout Standard
+Currently, the approach to identify a robust constitutive model follows
+ the DEICE procedure [4]: (1) Delineation of general characteristic behaviors,
+ (2) Establishment of an appropriate theoretical framework, (3) Identification
+ of specific functional forms of the constitutive relation, (4) Calculation
+ of the values of the material parameters, and (5) Evaluation of the predictive
+ capability of the final constitutive relation.
+ Dr.
+ Y.
+ C.
+ Fung discovered the famous Green-strain based, exponential form of the
+ strain–energy function for soft tissues, iconized now as the Fung-elastic
+ model.
+\end_layout
+
+\begin_layout Standard
+Briefly, Fung showed that preconditioned soft tissue can be considered pseudo-el
+astic [5,6], and the slope of load–deflection curve is proportional to the
+ load in uniaxial elongation tests of rabbit mesentery.
+ Consequently, an exponential function was used to account for the nonlinearity
+ of the stress–strain curve for soft tissues.
+\end_layout
+
+\begin_layout Standard
+Humphrey et al.
+ performed constant invariant biaxial experiments, in which each of the
+ strain invariant was independently varied, to infer specific functional
+ forms of strain invariant-based constitutive equations.
+ Based on the experimental observations, a polynomial form of the strain–energy
+ function was devised.
+\end_layout
+
+\begin_layout Standard
+To formulate a microstructurally-motivated constitutive model, Holzapfel
+ et al.
+ [9] modeled the arterial tissue as bi-layer fiber-reinforced composite,
+ in which the contributions of a ground matrix and collagen fibers can be
+ modeled separately in a strain–energy function.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+expert-constructed constitutive models are (Holzapfel–Gasser–Ogden [9],
+ Gasser–Ogden–Holzapfel, and four-fiber families)
+\end_layout
+
+\begin_layout Standard
+The Universal Approximation Theorem tells us that Neural Networks has a
+ kind of universality i.e.
+ no matter what f(x) is, there is a network that can approximately approach
+ the result and do the job! This result holds for any number of inputs and
+ outputs.
+\end_layout
+
+\begin_layout Standard
+Traditional feedforward fully-connected neural networks (FFNN) have been
+ used to model the strain (input) and stress (output) relations.
+ Compared to an expert-constructed model, a FFNN-based constitutive model
+ has three major disadvantages: (1) a large number of constitutive parameters
+ with no physical meanings, in contrast to only a few constitutive parameters
+ in an expert-constructed model.
+ (2) An expert-constructed model can not only delineate and capture the
+ general mechanical behaviors of a class of materials, but also can accurately
+ model an individual subject (e.g.
+ individual material responses) by fine tuning the constitutive parameters.
+ The model parameters of FFNN-based models for different subjects are completely
+ independent to each other.
+ (3) a FFNN-based model cannot guarantee its convexity, which is important
+ for ensuring the model is physically meaningful with unambiguous mechanical
+ behaviors.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted3.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this study, we developed a novel neural network-based material model
+ (NNMat) which employs a physics constraint and a hierarchical learning
+ strategy (Fig.
+ 1): (1) establishing constitutive laws to describe general characteristic
+ behaviors of a class of materials; (2) determining constitutive parameters
+ for an individual subject.
+ These two steps are equivalent to 3rd and 4th steps of the DEICE procedure.
+ 
+\end_layout
+
+\begin_layout Standard
+The neural network structure consists of two parameter sets corresponding
+ to the two steps: (1) a “class” parameter set for characterizing the general
+ elastic properties of the class of materials; and (2) a “subject” parameter
+ set with three parameters for modeling individual material response.
+\end_layout
+
+\begin_layout Section
+Constitutive modeling of soft biological tissues
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Soft biological tissues comprise bundles of collagen fibers embedded in
+ a ground matrix and can be regarded as fiber-reinforced composites.
+ 
+\end_layout
+
+\begin_layout Standard
+Constitutive modeling of the hyperelastic tissues is often achieved by specifyin
+g the strain energy density W as a function of deformation gradient W(F),
+ where F represents the deformation gradient tensor.
+\end_layout
+
+\begin_layout Subparagraph*
+There are lots of materials that does not follow the linear elastic model
+ in the elastic zone.
+ For example, the rubber is a non-linear elastic material.
+ For such material so called hyperelastic, the constitutive equation is
+ no more 
+\begin_inset Formula $\sigma=\epsilon E$
+\end_inset
+
+.
+ Instead, the stress-strain relation is governed by something called the
+ strain energy density function W and deformation gradient tensor F.
+\end_layout
+
+\begin_layout Standard
+Constitutive modeling of the hyperelastic tissues is often achieved by specifyin
+g the strain energy density W as a function of deformation gradient W(F),
+ where F represents the deformation gradient tensor.
+\end_layout
+
+\begin_layout Standard
+Microstructurally-motivated constitutive models have 
+\bar under
+become increasingly utilized
+\bar default
+ for soft tissues, in which the 
+\bar under
+contributions of the matrix and collagen fibers can be modeled separately
+\bar default
+.
+ In such models, the strain energy density function W is usually formulated
+ based on strain invariants of the right Cauchy–Green tensor, C = 
+\begin_inset Formula $F^{T}F$
+\end_inset
+
+ (a strain tensor).
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+Anisotropy involves directional variation at one point whereas, the heterogeneit
+y is the spatial variation in the same direction.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted4.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+How to obtain the constitutive equation for linearly elastic materials:
+\end_layout
+
+\begin_layout Plain Layout
+Strain energy: 
+\begin_inset Formula $U=\frac{1}{2}V\sigma\epsilon$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Differentiating the strain energy 
+\begin_inset Formula $U$
+\end_inset
+
+ w.r.t.
+ 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{\partial U}{\partial\epsilon}=\frac{1}{2}AL\left(\frac{\partial\sigma}{\partial\epsilon}\epsilon+\sigma\frac{\partial\epsilon}{\partial\epsilon}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{\partial F\Delta}{\partial\epsilon}=\frac{1}{2}AL\left(\frac{\partial\sigma}{\partial\epsilon}\epsilon+\sigma\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+since, 
+\begin_inset Formula $\Delta=\epsilon L$
+\end_inset
+
+ and 
+\begin_inset Formula $F=\sigma A$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sigma A\frac{\partial\epsilon L}{\partial\epsilon}=\frac{1}{2}AL\left(\frac{\partial\sigma}{\partial\epsilon}\epsilon+\sigma\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sigma AL=\frac{1}{2}AL\left(\frac{\partial\sigma}{\partial\epsilon}\epsilon+\sigma\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula $2\sigma=\left(\frac{\partial\sigma}{\partial\epsilon}\epsilon+\sigma\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sigma=\frac{\partial\sigma}{\partial\epsilon}\epsilon$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+where 
+\begin_inset Formula $\frac{\partial\sigma}{\partial\epsilon}$
+\end_inset
+
+ is called the modulus of elasticity E for 
+\series bold
+linearly elastic materials
+\end_layout
+
+\begin_layout Plain Layout
+Similarly, for complex materials, the derivative of strain energy density
+ function W can be taken wrt to the strain tensor using the directional
+ derivative.
+ or to simplify the things, we can take the derivative w.r.t.
+ to the eigenvalues aka the strain invariants of the strain tensor to avoid
+ using the directional derivative and breakdown the derivatives to simple
+ functions using the eigendecomposition.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted5.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $I_{k}$
+\end_inset
+
+ are the strain invariants that is used to compute the 
+\begin_inset Formula $W_{k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted6.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are several expert constructed models for the formulation of 
+\begin_inset Formula $W_{k}$
+\end_inset
+
+.
+ This paper is using the HGO model for the comparison with the ML based
+ constitutive equation.
+\end_layout
+
+\begin_layout Section
+Expert-constructed constitutive equations
+\end_layout
+
+\begin_layout Subsubsection*
+Strain energy density
+\end_layout
+
+\begin_layout Standard
+The strain-energy density of a material is defined as the strain energy
+ per unit volume.
+ It is equal to the area under the stress-strain diagram of a material,
+ measured from 
+\begin_inset Formula $ε_{x}$
+\end_inset
+
+ = 0 to 
+\begin_inset Formula $ε_{x}$
+\end_inset
+
+ = 
+\begin_inset Formula $ε_{1}$
+\end_inset
+
+ where 
+\begin_inset Formula $\epsilon_{1}$
+\end_inset
+
+ is the normal strain.
+ For anisotropic material, the strain energy density function depends on
+ the two fiber directions that are assumed to be symmetric about an axis
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted7.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Additive split
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted8.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, the 
+\begin_inset Formula $a_{01},\,a_{02}$
+\end_inset
+
+ are the fiber directions fo the 
+\series bold
+fiber-reinforced composite 
+\series default
+that accounts for the anisotropic behavior.
+ Therefore,l the elastic strain energy density does not include these fiber
+ directions.
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_body
+\end_document

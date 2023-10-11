@@ -1,0 +1,742 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+derivative of noisydata
+\end_layout
+
+\begin_layout Section
+Loss function 
+\end_layout
+
+\begin_layout Subsection
+regression
+\end_layout
+
+\begin_layout Standard
+Initially for a randomly approximated line using linear regression
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted1.png
+	lyxscale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally, the error at each point would reduce to zero
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted2.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However, if an outlier is introduced, then the model behaves really bad
+ because the least-square tries to include the outlier in the error computation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted3.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However, if we introduce L1 norm or LASSO like regressor then the model
+ will ingore the minority outlier and will fit the data on majority trend.
+ It leads to poor performance, if we don't care about the extreme cases
+ then this will work well.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted4.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The usage of least-square gives smooth gradient, where absolute errors involves
+ discontinuity.
+ Thus instead of gradient descent subgradietns are used.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted5.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So in short we have two loss measurements, the least -square that loves
+ outlier and absolute error that hates the outlier.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted6.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+When the outlier constitutes significant part of the whole data
+\end_layout
+
+\begin_layout Standard
+In that case, we can't use both the least-square and the absolute error.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted7.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To compromise, we can use something called the Pseudo-Huber loss.
+ It combines both the losses, if the error for a datapoint is less than
+ a certain limit 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ (a hyperparameter) then switch to least square or use the absolute error.
+ The result still may be trash.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted8.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Regularization
+\end_layout
+
+\begin_layout Standard
+regularization helps in balancing the model complexity i.e.
+ low order polynomials and decrease the MSE.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted9.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Derivative of noisy data
+\end_layout
+
+\begin_layout Standard
+link: https://www.hindawi.com/journals/isrn/2011/164564/
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted10.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We consider the problem of differentiating a function specified by noisy
+ data.
+ Regularizing the differentiation process avoids the noise amplification
+ of finite-difference methods.
+ We use totalvariation regularization, which allows for discontinuous solutions.
+ The resulting simple algorithm accurately differentiates noisy functions,
+ including those which have a discontinuous derivative.
+\end_layout
+
+\begin_layout Subsection
+Introduction
+\end_layout
+
+\begin_layout Standard
+Conventional finite -difference will greatly amplify any noise present in
+ the data.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted11.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted12.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The data fidelity term DF can choose based on the type of noise that is
+ added.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted13.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Total variational regularization
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted14.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These assumptions guarantees that the F has a unique minimiser.
+\end_layout
+
+\begin_layout Subsection*
+Advantages of using total variation
+\end_layout
+
+\begin_layout Standard
+It suppresses the noise as noisy function will have a large total variation.
+ It allow the computation of discontinuous derivatives.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted15.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Numerical implementation
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\begin_inset Graphics
+	filename pasted16.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted17.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+What they did?
+\end_layout
+
+\begin_layout Standard
+They've used uniform grid with central differencing.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted18.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+For large problems
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted19.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Examples
+\end_layout
+
+\begin_layout Subsection
+A Simple Non-smooth Example
+\end_layout
+
+\begin_layout Section*
+Using FDM
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted20.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted21.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted22.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Just denoising using H1 regularization
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted25.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+H1 regularization 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted23.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Discrepancy Principle: https://epubs.siam.org/doi/10.1137/1.9781611974942.ch13
+\end_layout
+
+\begin_layout Section*
+total-variation regularized differentiation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted24.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted26.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We presented a method for regularizing the numerical derivative process,
+ using totalvariation regularization.
+ Unlike previously developed methods, the TV method allows for discontinuities
+ in the derivatives, as desired when differentiating data corresponding
+ to nonsmooth functions.
+ We used the lagged diffusivity algorithm, which enjoys proven convergence
+ properties, with one implementation that works rapidly for small problems,
+ and a second more suitable for large problems.
+ The TV regularization allows the derivative to capture more features of
+ the data, while adjusting the regularization parameter controls the scale
+ of fluctuations in the data that are ignored.
+\end_layout
+
+\begin_layout Section
+Simple explanation from medium.com
+\end_layout
+
+\begin_layout Standard
+Link: https://oliver-k-ernst.medium.com/how-to-differentiate-noisy-signals-2baf71b
+8bb65
+\end_layout
+
+\begin_layout Standard
+The well known problem for a noisy signal is that: 
+\end_layout
+
+\begin_layout Standard
+Differentiation amplifies noise.
+ 
+\end_layout
+
+\begin_layout Standard
+Integration introduces drift.
+ 
+\end_layout
+
+\begin_layout Standard
+If you think you’re clever, you’ll come up with some sort of smoothing approach
+ to combat that.
+ You’ll try a low-pass filter on the signal to eliminate the noise, and
+ then you’ll differentiate it.
+ Maybe you’ll even smooth that derivative again, and hope that the integrated
+ signal will still be accurate! But no approach with smoothing will be without
+ problems — the real secret is to regularize the differentiation itself.
+\end_layout
+
+\begin_layout Standard
+I recently came across Total Variation Regularization (TVR) — you may have
+ encountered this before in the field of image denoising, similar to the
+ description you’ll find on Wikipedia.
+ Here I’ll show you how it applies to differentiating noisy signals following
+ this paper and this book (chapter 8).
+ I’ll take you through the main idea and then on to some examples and code
+ in Python and Mathematica.
+\end_layout
+
+\begin_layout Section
+Total-Variation regularization (TVR) in python
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted27.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted28.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, D is differentiation and A is integration matrix.
+ The integral is carried out by using the trapezoidal rule.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted29.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted30.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted31.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted32.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted33.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+The lagged diffusivity fixed point iteration is better than gradient descent
+ or newton's method.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted34.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+ALGORITHM
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted35.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted36.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted37.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Example: damped oscillator
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted38.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted39.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted40.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now the derivative looks smoother, but (1) the initial points doesn’t look
+ good, and (2) the integrated signal is off in the peaks.
+ Maybe you believe the chosen cutoff is too low — let’s try again with a
+ higher cutoff:
+\end_layout
+
+\begin_layout Standard
+Now the integrated signal looks better, but the derivative looks too noisy!
+ That’s the problem with these approaches — you end up balancing the smoothness
+ of the derivatives and the accuracy of the integrated signal.
+ And before you think a moving average will do better than a low-pass filter
+ — forget it! 
+\end_layout
+
+\begin_layout Standard
+Let’s look at how TVR does for this task.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted41.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted42.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted43.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted44.png
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

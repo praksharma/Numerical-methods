@@ -1,0 +1,465 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language british
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style british
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Eigenvalues and eigenvectors
+\end_layout
+
+\begin_layout Standard
+The Eigen-decomposition is a matrix decomposition method.
+ we use matrix to map one vector into others.
+\end_layout
+
+\begin_layout Standard
+For example 
+\begin_inset Formula $Ax=b$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+The eigenvectors are very special vectors, such that when a matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ is multiplied with a vector 
+\begin_inset Formula $x$
+\end_inset
+
+, the eigenvector is in the same direction to vector 
+\begin_inset Formula $x$
+\end_inset
+
+, with some extension or compression defined by scalars called eigenvalues
+ 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+So any vector 
+\begin_inset Formula $x$
+\end_inset
+
+ is an eigenvector if 
+\begin_inset Formula $Ax=\lambda x$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Also, there a n eigenvalues for a n dimensional square matrix.
+\end_layout
+
+\begin_layout Section
+Computing the eigenvalue
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\left(A-\lambda I\right)x=\overrightarrow{0}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, the trivial solution could be 
+\begin_inset Formula $x=0$
+\end_inset
+
+, but that is useless, that doesn't count even.
+ So the other solution is 
+\begin_inset Formula $A-\lambda I=\overrightarrow{0}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+A matrix represents a 2D surface (remember meshgrid?) for example rectangle
+ or any geometrical figure.
+ and we use determinant to compute the area of 2D geometry for example area
+ of a triangle.
+ So, for a matrix to be equal to zero or singular or null, the area of the
+ shape it represents must be zero i.e.
+ the determinant of the matrix should be zero.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $det(A-\lambda I)=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since, this equation is independent of vector 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ That is the eigenvalue we would obtain from this equation would always
+ yield a eigenvector 
+\begin_inset Formula $x$
+\end_inset
+
+ such that 
+\begin_inset Formula $Ax=\lambda x$
+\end_inset
+
+ or the eigenvalue is in the same direction after the matrix mapping of
+ the eigenvector.
+ That is why eigenvectors are very special vectors.
+ And this equation is known as the characteristic equation because the eigenvalu
+es obtained decides the eigenvectors or the so-called special vectors 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Manual computation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted1.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Using algorithmic approach
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted2.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted3.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For 2x2 matrices.
+ the trace of the matrix is sum of the eigenvalues and the product of the
+ eigenvectors is the determinant of the matrix.
+\end_layout
+
+\begin_layout Section
+Some comparison
+\end_layout
+
+\begin_layout Standard
+Example-1
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $A=\left[\begin{array}{cc}
+0 & 1\\
+1 & 0
+\end{array}\right]$
+\end_inset
+
+ 
+\begin_inset Formula $\lambda_{1}=1$
+\end_inset
+
+ 
+\begin_inset Formula $x_{1}=\left[\begin{array}{c}
+1\\
+1
+\end{array}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda_{2}=-1$
+\end_inset
+
+ 
+\begin_inset Formula $x_{2}=\left[\begin{array}{c}
+-1\\
+1
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Example-2
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $B=\left[\begin{array}{cc}
+3 & 1\\
+1 & 3
+\end{array}\right]$
+\end_inset
+
+ 
+\begin_inset Formula $\lambda_{1}=4$
+\end_inset
+
+ 
+\begin_inset Formula $x_{1}=\left[\begin{array}{c}
+1\\
+1
+\end{array}\right]$
+\end_inset
+
+and 
+\begin_inset Formula $\lambda_{2}=2$
+\end_inset
+
+ 
+\begin_inset Formula $x_{2}=\left[\begin{array}{c}
+-1\\
+1
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In these two examples, 
+\begin_inset Formula $B=A+3I$
+\end_inset
+
+ is just an extension along the eigenvectors, therefore, the eigenvectors
+ will remain same and the eigenvalues symbolising the extension.
+\end_layout
+
+\begin_layout Standard
+i.e.
+ new eigenvalues=old eigenvalues+3
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Proof:
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $Ax=\lambda x$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+then, 
+\begin_inset Formula $\left(A+3I\right)x=\lambda x+3x=\left(\lambda+3\right)x$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, eigenvectors are still the same but the eigenvalue increases by 3.
+ 
+\end_layout
+
+\begin_layout Section
+properties
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Additivity
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted4.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, the addition of the eigenvalues is not possible until the eigenvectors
+ are identical for both the vectors.
+ 
+\end_layout
+
+\begin_layout Section*
+Example: rotation matrix
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted5.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This rotation takes in a vector and rotates it by 90 degrees.
+ So, it is not possible for a real numbered vector to be in the same direction
+ after 90 degrees rotation.
+ But there exist a solution in the imaginary dimension.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted6.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, for a rotation matrix or an orthogonal matrix other than multiples
+ of 
+\begin_inset Formula $\pi$
+\end_inset
+
+ rotation, we would always obtain complex conjugate eigenvalues.
+ 
+\end_layout
+
+\begin_layout Standard
+Or, for obtaining real eigenvalues the matrix should be symmetric or nearly
+ symmetric or the eigenvectors must be perpendicular or nearly perpendicular
+ (use dot product for check the orthogonality) .
+\end_layout
+
+\begin_layout Section*
+Example; triangular matrix
+\end_layout
+
+\begin_layout Standard
+For a triangular matrix, the eigenvalues the are the diagonal elements itself.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted7.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+While finding the eigenvectors
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted8.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since, there are not two independent eigenvectors, the matrix is degenerate
+ matrix and we are in shortage of eigenvectors.
+\end_layout
+
+\end_body
+\end_document

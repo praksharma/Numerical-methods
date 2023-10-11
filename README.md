@@ -1,2 +1,2 @@
 # Numerical-methods
-Some of the numerical methods that I use in my work
+Some of the numerical methods that I used in past.

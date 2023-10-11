@@ -1,0 +1,865 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language british
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style british
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Data Assimilation- Nathan Kutz
+\end_layout
+
+\begin_layout Standard
+The integration of a model and measurements of a system to predict the future
+ state of the system.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted1.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here the g(t,y) are M data measurements for each time point.
+ This is an over determined system because there are M more constraints.
+ In general, we use regression on over-determined problems.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted3.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $q_{1}$
+\end_inset
+
+ is an unknown dynamics (physics) that we don't know.
+ Also, there is some error in the measurement of the initial data accounted
+ by 
+\begin_inset Formula $q_{2}$
+\end_inset
+
+.
+ Also, the sensors have some noise depicted by 
+\begin_inset Formula $q_{3}$
+\end_inset
+
+.
+ We have to think about an optimal trajectory that minimises the model error
+ 
+\begin_inset Formula $q_{1}$
+\end_inset
+
+, initial condition errors 
+\begin_inset Formula $q_{2}$
+\end_inset
+
+ and in some sense the measurement errors 
+\begin_inset Formula $q_{3}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted4.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+We would have to define a optimisation function.
+ Typically, a quadratic optimisation function is defined, so that we can
+ apply convex optimisation techniques.
+ Remember, that in optimisation module, we learnt, it is pretty easy to
+ deal with quadratic functions.
+ Also, in most of the cases, if the optimisation function is defined smarty
+ (like 
+\begin_inset Formula $x_{1}^{2}+x_{2}^{2}$
+\end_inset
+
+ not like 
+\begin_inset Formula $x_{1}^{2}x_{2}^{2}$
+\end_inset
+
+), the Hessian matrix would be a constant and it would be either positive
+ definite or non-positive definite at all the points.
+ So, we don't have to bother about our initial guesses.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted5.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+J(y) is a quadratic loss function and 
+\begin_inset Formula $W_{i}$
+\end_inset
+
+ are inverse of the error covariance.
+ Individual terms would dropout if the model, initial condition or measurement
+ data is perfect.
+\end_layout
+
+\begin_layout Section
+Model prediction- an example
+\end_layout
+
+\begin_layout Standard
+Let us assume that the model and the measurements are probability distributions
+ as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted6.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Model prediction with a Gaussian statistics
+\end_layout
+
+\begin_layout Subsubsection
+Bayes theorem assuming Gaussian statistics
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted7.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+LHS is probablity of x given y, also known as the conditional probability.
+ In the RHS, the p(y|x) is fairly easy to compute and p(x) and p(y) is already
+ given.
+\end_layout
+
+\begin_layout Standard
+Assuming the Gaussian statistics i.e.
+ the area under the distribution would be 1.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted8.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $\sigma_{y}$
+\end_inset
+
+ is the variance in the x and y.
+ Also, 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ is the mean of x whereas, 
+\begin_inset Formula $\sigma_{0}$
+\end_inset
+
+ is the variance of x and 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+.
+ The resulting conditional probability would be as follows
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted9.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Computing the maximum likelihood error (MLE)
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Gaussian distribution are in exponentials and a log(maximum likelihood)
+ cancels the exponentials and we are left with the quadratic function only.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted10.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, J(x) is the maximum likelihood and log(
+\begin_inset Formula $c_{3}$
+\end_inset
+
+) would cancel the 
+\begin_inset Formula $c_{3}$
+\end_inset
+
+ from p(x|y) and we are left with just the quadratic functions.
+\end_layout
+
+\begin_layout Standard
+So people always use Gaussian statistics for noise and the a log of the
+ maximum likelihood gives the simple quadratic functions.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Our objective is to find the x which minimises the J(x).
+ 
+\series default
+The most obvious thing that one can do is taking a derivative and find the
+ stationary point.
+ This is where we can leverage the quadratic form as the Hessian would be
+ constant.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted11.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+This is the prediction of 
+\begin_inset Formula $X$
+\end_inset
+
+ with an assimilation of the measurement data y defined by a probability
+ distribution p(y).
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Case 1: Measurements are perfect- sensor is perfect
+\end_layout
+
+\begin_layout Standard
+The variance in p(y) would be zero i.e.
+ 
+\begin_inset Formula $\sigma_{Y}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted12.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It means if the measurements are perfect then the measurements are exactly
+ the same as the state of the system.
+ It is a consistency check.
+\end_layout
+
+\begin_layout Subsubsection*
+Case 2: The Variance of the simulated system/error
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted13.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So the variance of the data assimilated simulated system is less than the
+ variance of the individual measurements i.e.
+ variance of x and y.
+ So the assimilated system guarantees that the error is less than the individual
+ error in the measurement y and the state of the system x.
+\end_layout
+
+\begin_layout Subsubsection*
+Graphical representation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted14.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This picture is showing the probability distribution of x, state of the
+ system given the model y|x.
+ The have a common area that is given by 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ and it can be seen that the variance (length along the x axis) is much
+ smaller than the two of them individually.
+\end_layout
+
+\begin_layout Subsubsection
+A general expression for the assimilated model
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted15.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+here, 
+\begin_inset Formula $X_{0}$
+\end_inset
+
+ is the data of the model state, 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ is the corresponding variance.
+ In data assimilation literature the 
+\begin_inset Formula $k(Y-X_{0})$
+\end_inset
+
+ is known as the 
+\series bold
+\bar under
+innovation.
+ 
+\series default
+\bar default
+Where, 
+\begin_inset Formula $K$
+\end_inset
+
+ itself is called the ensembled Kalman filter.
+\end_layout
+
+\begin_layout Section
+For dynamical systems
+\end_layout
+
+\begin_layout Standard
+Suppose in a simulation the measurements are not available at the data points
+ in the model.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted16.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+H is a mapping matrix, that maps the x coordinates (model) to y coordinates
+ (measurement data) with an error in the measurement 
+\begin_inset Formula $q_{3}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted17.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The first line is a dynamical model itself and the second line is our prediction.
+ The difference in the true solution and our prediction is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted18.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, we can expand the 
+\begin_inset Formula $F(x_{n})$
+\end_inset
+
+ as its Taylor expansion up to the first term only.
+ As a result, the 
+\begin_inset Formula $F(X_{0_{n}})$
+\end_inset
+
+ would get cancelled.
+ Now we can simply compute the expectation or the weighted average 
+\begin_inset Formula $E(x)$
+\end_inset
+
+ similar to an arithmetic mean of the square of this difference as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename ..png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We want to simplify this expression as follows
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted19.png
+
+\end_inset
+
++ higher order terms
+\end_layout
+
+\begin_layout Standard
+Here, R is called the residual.
+ and this formula give the expectation from now to a future time.
+\end_layout
+
+\begin_layout Standard
+The final assimilated model would be
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted21.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Again K is the Kalman filter.
+ and P is the variance between the observation and the model
+\end_layout
+
+\begin_layout Section
+Vectorial form and the mapping matrix
+\end_layout
+
+\begin_layout Subsection
+Extended Kalman filter (EKF)
+\end_layout
+
+\begin_layout Subsubsection*
+Model:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted23.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Prediction:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted24.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Again, we would take the difference or variance of the model and the prediction.
+ The would do a Jacobian of the 
+\begin_inset Formula $f(\bar{x})$
+\end_inset
+
+ .
+ Jacobian is for vectors, gradient is for multivariate scalars and slope
+ is for univariate scalars.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted25.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Again, this formula give the expectation from now to a future state.
+ The assimilated model is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted26.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, H is the mapping matrix.
+ The extended Kalman filter is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted27.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The variance of the assimilated model is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted28.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If the observation location is the same the model location then H is simply
+ identity.
+\end_layout
+
+\begin_layout Section
+Data assimilation: Lorenz system
+\end_layout
+
+\begin_layout Standard
+Here, x_ic is the noisy initial conditions, that would compute the noisy
+ model predictions x_sol.
+ Also, xdat is the noisy measurements data.
+ These would have variance q2 and q3, that would result in the Kalman filter.
+\end_layout
+
+\begin_layout Standard
+The data assimilation is done in small steps.
+\end_layout
+
+\begin_layout Standard
+The tspan=20s, where as tspan2=0.5s
+\end_layout
+
+\begin_layout Standard
+Small assimilation works like small elements in finite elements.
+ The error would be really small for small assimilations.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+q3=1.5 # strength of the error
+\end_layout
+
+\begin_layout Plain Layout
+
+xdata=x[::50,0]+q3*xn 
+\end_layout
+
+\begin_layout Plain Layout
+
+ydata=x[::50,1]+q3*yn 
+\end_layout
+
+\begin_layout Plain Layout
+
+zdata=x[::50,2]+q3*zn
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+x_da=np.array([]) 
+\end_layout
+
+\begin_layout Plain Layout
+
+for j in range(0,np.shape(tdata)[0]-1): # data assimilation in steps    
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+	tspan2=np.arange(0,0.51,0.01,dtype=float)     # taking out model predictions
+ for tspan2     
+\end_layout
+
+\begin_layout Plain Layout
+
+	x_sol=odeint(lambda x,t:lorenz(x,t,sigma,beta,rho), x_ic, tspan2, atol=1e-10,
+ rtol=1e-10)     
+\end_layout
+
+\begin_layout Plain Layout
+
+	# choosing the last point of the exact solution as the initial condition
+     
+\end_layout
+
+\begin_layout Plain Layout
+
+	# Model predictions     
+\end_layout
+
+\begin_layout Plain Layout
+
+	xic0=np.hstack([x_sol[-1,0],x_sol[-1,1],x_sol[-1,2]])     
+\end_layout
+
+\begin_layout Plain Layout
+
+	# new x pivot     
+\end_layout
+
+\begin_layout Plain Layout
+
+	# Measurements     
+\end_layout
+
+\begin_layout Plain Layout
+
+	xdat=np.hstack([xdata[j+1],ydata[j+1],zdata[j+1]])     
+\end_layout
+
+\begin_layout Plain Layout
+
+	K=q2/(q2+q3) # Kalman filter     
+\end_layout
+
+\begin_layout Plain Layout
+
+	# Updated initial condition     
+\end_layout
+
+\begin_layout Plain Layout
+
+	x_ic=xic0+K*(xdat-xic0)     
+\end_layout
+
+\begin_layout Plain Layout
+
+	# to vertically concatenate the [x,y,z]     
+\end_layout
+
+\begin_layout Plain Layout
+
+	# if x_da.size is false ther concatenation won't work because of inconsistent
+ dimension     
+\end_layout
+
+\begin_layout Plain Layout
+
+	# so we just replace x_da with x_sol if x_da.size is false     
+\end_layout
+
+\begin_layout Plain Layout
+
+	# Here -1 is used to ignore the last point overlapping.
+     
+\end_layout
+
+\begin_layout Plain Layout
+
+	x_da=np.vstack([x_da,x_sol[:-1,:]]) if x_da.size else x_sol[:-1,:]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# Concatenate the last point for the last iteration 
+\end_layout
+
+\begin_layout Plain Layout
+
+x_da=np.vstack([x_da,x_sol[-1,:]]) 
+\end_layout
+
+\begin_layout Plain Layout
+
+plt.figure(5) 
+\end_layout
+
+\begin_layout Plain Layout
+
+plt.title('EKF with purturbed initial condition and noisy data') 
+\end_layout
+
+\begin_layout Plain Layout
+
+plt.plot(tspan,x[:,0],'black',tspan[:-1],x_da[:,0],'red')     
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

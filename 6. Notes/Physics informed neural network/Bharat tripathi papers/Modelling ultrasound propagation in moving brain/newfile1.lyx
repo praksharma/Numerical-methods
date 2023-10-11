@@ -1,0 +1,341 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/pasted1.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+AIM
+\series default
+: We present a simulation approach to generate ultrasound images of the
+ brain undergoing nonlinear elastic motion due to a traumatic impact.
+\end_layout
+
+\begin_layout Section
+Shockwave (compressible flow)(non-linear acoustics)(discontinuous shockwave)
+\end_layout
+
+\begin_layout Standard
+When the speed of a source equals the speed of sound (v = c) the wave fronts
+ cannot escape the source.
+ The resulting pile of waves forms a large amplitude "sound barrier" that
+ makes sustained flight at this speed difficult and risky.
+ When the speed of a source exceeds the speed of sound (v > c) the wave
+ fronts lag behind the source in a cone-shaped region with the source at
+ the vertex.
+ The edge of the cone forms a supersonic wave front with an unusually large
+ amplitude called a "shock wave".
+ When a shock wave reaches an observer a "sonic boom" is heard.
+\end_layout
+
+\begin_layout Standard
+The ratio of the speed of a moving object (v) to the speed of sound (c)
+ in a fluid is known as the Mach number (Ma) .
+\end_layout
+
+\begin_layout Subsubsection*
+Shear shockwave
+\end_layout
+
+\begin_layout Standard
+Recently, a new type of shock wave has been observed experimentally with
+ high-frame-rate ultrasound: shear shock waves in soft solids.
+ These strongly nonlinear waves are characterized by a high Mach number,
+ because the shear wave velocity is much slower, by 3 orders of magnitude,
+ than the longitudinal wave velocity.
+ Furthermore, these waves have a unique cubic nonlinearity which generates
+ only odd harmonics.
+ Unlike longitudinal waves for which only compressional shocks are possible,
+ shear waves exhibit cubic nonlinearities which can generate positive and
+ negative shocks.
+ 
+\end_layout
+
+\begin_layout Standard
+We have recently observed, experimentally, that shear shock waves are generated
+ deep inside the brain starting from a low initial acceleration (sub-concussive
+ range).
+ This observation has motivated the development of simulation tools to model
+ shear shock waves in the human head.
+\end_layout
+
+\begin_layout Subsubsection*
+Elastography
+\end_layout
+
+\begin_layout Standard
+Elastography is a medical imaging modality that maps the elastic properties
+ and stiffness of soft tissue.
+ The main idea is that whether the tissue is hard or soft will give diagnostic
+ information about the presence or status of disease.
+ For example, cancerous tumours will often be harder than the surrounding
+ tissue, and diseased livers are stiffer than healthy ones.
+\end_layout
+
+\begin_layout Section
+Abstract
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/pasted2.png
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename pasted1.png
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename pasted2.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+We present a simulation approach to generate ultrasound images of the brain
+ undergoing nonlinear elastic motion due to a traumatic impact.
+ Finite difference simulations can model ultrasound propagation through
+ the multi-scale heterogeous representation of human tissues.
+ Finite Differ- ence Time Domain (FDTD) methods can directly model wave
+ propagation and hence, account for physical phenomena such as single and
+ multiple scattering, reflection and refraction.
+ The backscattered energy received at the transducer surface can then be
+ beamformed into a highly realistic ultrasound image.
+\end_layout
+
+\begin_layout Standard
+A FDTD-based simulation tool (referred herein as “Fullwave”) that we have
+ previously developed, uses a second-order method to describe nonlinear
+ propagation of acoustical waves in heterogeneous, attenuating media, such
+ as the soft tissue of the human body.
+\end_layout
+
+\begin_layout Subsubsection*
+Finite-difference time-domain method
+\end_layout
+
+\begin_layout Standard
+Finite-difference time-domain (FDTD) is a numerical analysis technique used
+ for modeling computational electrodynamics.
+ Since it is a time-domain method, FDTD solutions can cover a wide frequency
+ range with a single simulation run, and treat nonlinear material properties
+ in a natural way.
+ The FDTD method belongs in the general class of grid-based differential
+ numerical modeling methods (finite difference methods).
+ The time-dependent Maxwell's equations (in partial differential form) are
+ discretized using central-difference approximations to the space and time
+ partial derivatives.
+ The resulting finite-difference equations are solved in either software
+ or hardware in a leapfrog manner.
+\end_layout
+
+\begin_layout Subsubsection*
+Shear wave vs longitudinal wave
+\end_layout
+
+\begin_layout Standard
+In a longitudinal wave, particle motion in the medium is parallel to the
+ direction of the wave front.
+ Audible sound waves are longitudinal waves.
+ In a shear wave, particle motion is perpendicular to wave direction.
+ The shear waves generated by an impact to the brain can develop into destructiv
+e shear shock waves.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted3.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Brain motion during impact
+\end_layout
+
+\begin_layout Standard
+High frame-rate imaging techniques in combination with adaptive correlation-base
+d tracking algorithms have been used to observe that, the shear waves generated
+ by an impact to the brain can develop into destructive shear shock waves.
+ At the shock front the acceleration is amplified by a factor of up to 8.5,
+ i.e.
+ a 35g wave develops into a 300g wave deep inside the brain, which may be
+ the primary mechanism responsible for diffuse axonal injuries.
+\end_layout
+
+\begin_layout Standard
+This complex brain motion is governed by 
+\series bold
+nonlinear viscoelastic wave physics.
+
+\series default
+ Shear waves have Mach numbers, defined as the ratio of the particle velocity
+ to wave velocity, that are much larger than compressional waves, by about
+ three orders of magnitude.
+\end_layout
+
+\begin_layout Standard
+It has been shown that for a linearly-polarized plane wave excitation, where
+ the particle motion is in the axis orthogonal to the plane of wave propagation
+ (shear wave), brain motion can be described analytically by a cubically
+ nonlinear version of Burgers’ equation.
+\end_layout
+
+\begin_layout Standard
+Although this motion can be quite complex, it has a clear odd harmonic signature
+ in the frequency spectrum, i.e.
+ only the third, fifth, seventh, etc.
+ multiples of the fundamental frequency are generated by the nonlinear propagati
+on.
+ In other words, to capture the nonlinear brain motion, for a planar shear
+ wave one must also capture the odd harmonic spectrum.
+\end_layout
+
+\begin_layout Standard
+In shear wave elastography, the Young’s modulus is estimated from the shear
+ wave speed [30] and only the bulk of the energy at the fundamental frequency
+ must be measured to obtain this estimate.
+\end_layout
+
+\begin_layout Section
+Incorporation of brain motion for FDTD simulations
+\end_layout
+
+\begin_layout Standard
+The motion generated by a shear wave, e.g.
+ in elastography, can be accurately modeled by f
+\series bold
+inite difference simulations 
+\series default
+[23].
+ Displacements that were much smaller than the grid size (up to λ/6000)
+ have been previously modeled in Fullwave sim- ulations, using an impedance
+ flow method [23].
+ This method consisted of generating scatterers in the acoustic simulation
+ field, with each scatterer being composed of two spatial pixels.
+ Then, motion could be represented by redistributing the impedance between
+ the two constituent pixels of each scatterer.
+ 
+\end_layout
+
+\begin_layout Standard
+The two-pixel impedance flow method was applied to scatterer distributions
+ in a uniform background medium.
+ However, 
+\series bold
+tissue has heterogeneous acoustical structures from embedded connective
+ tissue, blood vessels, skin/fat layers and, in the case of brain, white
+ matter, grey matter and cerebrospinal fluid.
+
+\series default
+ Here, we present a) a generalization of the impedance flow method that
+ is applicable to any heterogeneous tissue maps with an arbitrary distribution
+ of impedance, b) validation of the method by imposing known shear shock
+ wave displacements in acoustical maps of the human brain.
+\end_layout
+
+\begin_layout Subsubsection*
+impedance method
+\end_layout
+
+\begin_layout Standard
+a method for localizing brain structures by measuring impedance of electric
+ current.
+\end_layout
+
+\end_body
+\end_document

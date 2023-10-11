@@ -1,0 +1,201 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/pasted1.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+AIM
+\series default
+: We present a simulation approach to generate ultrasound images of the
+ brain undergoing nonlinear elastic motion due to a traumatic impact.
+\end_layout
+
+\begin_layout Section
+Shockwave (compressible flow)(non-linear acoustics)(discontinuous shockwave)
+\end_layout
+
+\begin_layout Standard
+When the speed of a source equals the speed of sound (v = c) the wave fronts
+ cannot escape the source.
+ The resulting pile of waves forms a large amplitude "sound barrier" that
+ makes sustained flight at this speed difficult and risky.
+ When the speed of a source exceeds the speed of sound (v > c) the wave
+ fronts lag behind the source in a cone-shaped region with the source at
+ the vertex.
+ The edge of the cone forms a supersonic wave front with an unusually large
+ amplitude called a "shock wave".
+ When a shock wave reaches an observer a "sonic boom" is heard.
+\end_layout
+
+\begin_layout Standard
+The ratio of the speed of a moving object (v) to the speed of sound (c)
+ in a fluid is known as the Mach number (Ma) .
+\end_layout
+
+\begin_layout Subsubsection*
+Shear shockwave
+\end_layout
+
+\begin_layout Standard
+Recently, a new type of shock wave has been observed experimentally with
+ high-frame-rate ultrasound: shear shock waves in soft solids.
+ These strongly nonlinear waves are characterized by a high Mach number,
+ because the shear wave velocity is much slower, by 3 orders of magnitude,
+ than the longitudinal wave velocity.
+ Furthermore, these waves have a unique cubic nonlinearity which generates
+ only odd harmonics.
+ Unlike longitudinal waves for which only compressional shocks are possible,
+ shear waves exhibit cubic nonlinearities which can generate positive and
+ negative shocks.
+ 
+\end_layout
+
+\begin_layout Standard
+We have recently observed, experimentally, that shear shock waves are generated
+ deep inside the brain starting from a low initial acceleration (sub-concussive
+ range).
+ This observation has motivated the development of simulation tools to model
+ shear shock waves in the human head.
+\end_layout
+
+\begin_layout Section
+Abstract
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/pasted2.png
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename pasted1.png
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename pasted2.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+We present a simulation approach to generate ultrasound images of the brain
+ undergoing nonlinear elastic motion due to a traumatic impact.
+ Finite difference simulations can model ultrasound propagation through
+ the multi-scale heterogeous representation of human tissues.
+ Finite Differ- ence Time Domain (FDTD) methods can directly model wave
+ propagation and hence, account for physical phenomena such as single and
+ multiple scattering, reflection and refraction.
+ The backscattered energy received at the transducer surface can then be
+ beamformed into a highly realistic ultrasound image.
+\end_layout
+
+\begin_layout Standard
+A FDTD-based simulation tool (referred herein as “Fullwave”) that we have
+ previously developed [26], uses a second-order method to describe nonlinear
+ propagation of acoustical waves in heterogeneous, attenuating media, such
+ as the soft tissue of the human body.
+\end_layout
+
+\begin_layout Subsubsection*
+Finite-difference time-domain method
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_body
+\end_document
